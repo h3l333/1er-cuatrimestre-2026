@@ -1,0 +1,1 @@
+Fórmula o relación que define cómo se calcula y a partir de x. En una ecuación diferencial [[Ecuaciones Diferenciales Ordinarias]], una regla de correspondencia no da el valor de y directamente, sino que describe qué debe cumplir la función respecto a sus derivadas.

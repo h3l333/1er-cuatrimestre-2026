@@ -1,0 +1,1 @@
+- Soluciones que dependen de una sola constante arbitraria (C).
