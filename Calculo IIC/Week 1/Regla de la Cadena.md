@@ -1,0 +1,1 @@
+Regla que se aplica para derivar funciones compuestas. Describe cómo derivar desde afuera hacia adentro.

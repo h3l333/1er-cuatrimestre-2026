@@ -1,0 +1,1 @@
+Tienen dos constantes arbitrarias ($C_1$ y $C_2$). Poseen dos grados de libertad, lo que genera una variedad mucho más grande de curvas dentro de la misma familia ([[Familia de funciones]]).
