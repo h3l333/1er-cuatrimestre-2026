@@ -1,0 +1,11 @@
+- Parciales hechos en máquina
+- Visual Paradigm + Mockup Balsamiq
+- Es promocionable con 7 (o 6(?)) o más en los 2 parciales y TP entregado en tiempo y forma
+- TP cuatrimestral
+- Vamos a ver *patrones*
+- [omg.org](https://www.omg.org/)
+- https://refactoring.guru/es
+- La práctica hay que entregarla con alguna herramienta
+- Email profesor: flarosa@unimoron.edu.ar (hay que mandarle emails con el link a una página hecha con WordPress, con el código de la materia)
+- Repasamos CU ([[Qué es un modelo de CU]]) ([[Qué es un CU y que no es un CU]])
+- [[Bibliografía]]
