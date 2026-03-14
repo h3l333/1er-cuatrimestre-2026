@@ -1,1 +1,3 @@
-Fórmula o relación que define cómo se calcula y a partir de x. En una ecuación diferencial [[Ecuaciones Diferenciales Ordinarias]], una regla de correspondencia no da el valor de y directamente, sino que describe qué debe cumplir la función respecto a sus derivadas.
+Fórmula o relación que define cómo se calcula y a partir de x. En el contexto de [[Ecuaciones Diferenciales Ordinarias]], una regla de correspondencia no da el valor de y directamente, sino que describe qué debe cumplir la función respecto a sus derivadas. Ecuación que define una [[Familia de funciones]].
+
+>Difiere de una EDO en el sentido que una EDO en un punto x, y define la pendiente y "cambio" de la función de manera no estática; define una "tendencia" o "regla" para un GRUPO de funciones. Una regla de correspondencia, sin embargo, define el valor de y en función de x de manera "estática".

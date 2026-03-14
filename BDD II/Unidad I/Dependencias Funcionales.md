@@ -23,3 +23,5 @@ A functional dependency occurs when the value of an attribute or set of attribut
 - Student(ID, Name, Email) (relation schema)
 - ID -> Name, Email (functional dependency)
 
+>Functional dependencies allow for the "determination" of super keys ([[Superclaves]]) and candidate keys ([[Claves candidatas]]) in a relational schema.
+

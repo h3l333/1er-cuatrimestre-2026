@@ -1,0 +1,2 @@
+- **Atributo primo:** Atributo que es parte de al menos una clave candidata.
+- **Atributo no primo:** Atributo que no es parte de ninguna clave candidata ([[Claves candidatas]]).

@@ -1,4 +1,4 @@
->Definición: relación entre una función incógnita y cada una de sus derivadas. Establecen relaciones entre funciones incógnitas y sus derivadas. Traducen descripciones del cambio (la derivada, o dy/dx) en una descripción del estado (función o flia. de funciones, o y) usando reglas de correspondencia [[Regla de correspondencia]].
+>Definición: relación entre una función incógnita y cada una de sus derivadas. Establecen relaciones entre funciones incógnitas y sus derivadas. Traducen descripciones del cambio (la derivada, o dy/dx) en una descripción del estado (función o flia. de funciones, o y) usando reglas de correspondencia ([[Regla de correspondencia]]).
 
 ### Forma general:
 
@@ -21,6 +21,6 @@ Donde:
 
 El modelado de las ecuaciones diferenciales sirve para comprender mejor los fenómenos.
 
-Se pueden clasificar según órden y grado.
+Se pueden clasificar según órden y grado ([[Orden vs grado de una EDO]]).
 
 ***Contamos con más de un tipo de solución ([[Soluciones de las EDO]]) para las EDO. Resolvemos las EDO a partir de condiciones iniciales para entender cómo evolucionará un sistema en el tiempo o en el espacio.***

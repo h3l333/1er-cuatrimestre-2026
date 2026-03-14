@@ -1,12 +1,12 @@
-- Superclaves [[BDD II/Superclaves]]
-- Claves candidatas
-- Atributos primos y no primos
-- Propiedades indeseables
+- Superclaves ([[Superclaves]])
+- Claves candidatas ([[Claves candidatas]])
+- Atributos primos y no primos ([[Atributos primos vs no primos]])
+- Propiedades indeseables ([[Atributos poco deseables en una BDD]])
 	- Redundancia
 	- Repetición
 	- Imposibilidad de **representar** info.
 	- Imposibilidad de **recuperar** info.
-- Dependencias funcionales y su utilidad [[BDD II/Dependencias Funcionales]]
+- Dependencias funcionales y su utilidad ([[Dependencias Funcionales]])
 - Dependencias funcionales triviales
 - Dependencias funcionales deducidas usando las reglas de Armstrong
 - Las reglas de Armstrong
