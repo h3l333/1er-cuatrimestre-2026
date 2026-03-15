@@ -1,4 +1,4 @@
-- The main difference between a candidate key and a composite primary key is that composite primary keys are primary keys made up of multiple attributes that are unique to each table, meaning that one table can only have one. 
+- The main difference between a candidate key and a composite primary key is that *composite primary keys* are primary keys made up of multiple attributes that are unique to each table, meaning that one table can only have one.
 	- Example: A table of "Inscripciones" where the composite key is made up of Matricula + Cod_Materia.
 - Candidate keys on the other hand merely refer to a set of attributes within a table that uniquely identify a register within a table, for example, let's suppose:
 

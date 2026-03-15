@@ -1,6 +1,6 @@
 A "candidate key" is a group of one or more attributes that can identify in a unique manner each register (row) within a table.
 
-To be a candidate key, an attribute must:
+*To be a candidate key, an attribute must:*
 - Be unique for each row; no two rows can have the same value for that key.
 - Minimal: if a key is composed of multiple fields, none can be eliminated without the key losing it's capability of uniquely identifying each register.
 

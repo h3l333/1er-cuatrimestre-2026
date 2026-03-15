@@ -1,4 +1,3 @@
-
 - Describen cómo unos atributos determinan a otros.
 - Representan restricciones entre dos colecciones de atributos. 
 
@@ -24,4 +23,10 @@ A functional dependency occurs when the value of an attribute or set of attribut
 - ID -> Name, Email (functional dependency)
 
 >Functional dependencies allow for the "determination" of super keys ([[Superclaves]]) and candidate keys ([[Claves candidatas]]) in a relational schema.
+
+Además de las dependencias funcionales, existen las [[Dependencias Funcionales Triviales]]
+
+![[conjunto-dependencias.png]]
+
+Projection of functional dependencies = **the set of dependencies that remain valid when considering only a subset of attributes of a relation**.
 

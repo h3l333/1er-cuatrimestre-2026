@@ -7,9 +7,9 @@
 	- Imposibilidad de **representar** info.
 	- Imposibilidad de **recuperar** info.
 - Dependencias funcionales y su utilidad ([[Dependencias Funcionales]])
-- Dependencias funcionales triviales
+- Dependencias funcionales triviales ([[Dependencias Funcionales Triviales]])
 - Dependencias funcionales deducidas usando las reglas de Armstrong
-- Las reglas de Armstrong
+- Las reglas de Armstrong ([[Axiomas de Armstrong]])
 	- Reflexividad
 	- Aumentatividad
 	- Transitividad
@@ -17,11 +17,11 @@
 		- de la unión
 		- de la descomposición
 		- pseudotransitividad
-- Conjuntos de dependencias funcionales F y F+
-- Procedimiento para calcular F+
+- Conjuntos de dependencias funcionales F y F+ ([[Axiomas de Armstrong]])
+- Procedimiento para calcular F+ ([[Axiomas de Armstrong]])
 - Comprobación de una superclave, algoritmo para el cálculo de a+
-- Descomposición
-- Formas normales
+- Descomposición ([[Descomposición]]) ([[Descomposiciones con Pérdida]])
+- Formas normales ([[Normalización 2F a 3F]])
 
 # Videos de YouTube
 

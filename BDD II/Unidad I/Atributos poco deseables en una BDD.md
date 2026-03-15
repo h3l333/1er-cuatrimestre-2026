@@ -2,6 +2,7 @@
 - Repetición
 - Imposibilidad en recuperar cierta información
 - Imposibilidad en representar cierta información
+- Que los atributos no tengan sentido alguno según la lógica del mundo real que el sistema representa (ej.: fecha de nacimiento anterior a la de muerte) ([[Reglas de integridad]]) ([[CHECK constraints]])
 
 Suponer la siguiente table no normalizada ([[Normalización 2F a 3F]]), mal diseñada:
 
@@ -60,3 +61,7 @@ Suponer que se da de baja un único estudiante inscripto a un curso:
 |101|Ana|CS101|Databases|
 
 Al eliminarse al estudiante, se pierden todos los datos sobre el curso pese a que el curso aún existe. A esto se le llama una "deletion anomaly".
+
+---
+
+Para evitar los atributos pocos deseables en una BDD, utilizamos las [[Dependencias Funcionales]] como guía.

@@ -31,3 +31,5 @@ DepartmentName
 ```
 
 >Una tabla está en la 3ra forma normal si todos los atributos no claves dependen directamente de la clave primaria ([[Claves primarias]]).
+
+Tanto para pasar de la 1era forma normal a la 2da y para pasar de la 2da a la 3ra utilizamos la [[Descomposición]].
