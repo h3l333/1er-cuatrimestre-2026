@@ -19,3 +19,5 @@ a.       Determinar el alfabeto del lenguaje
 b.       Dar la/las hileras mínimas de este lenguaje
 c.       Dar alguna otra hilera de por lo menos 10 elementos
 d.       ¿Es finito o infinito?
+
+[[Practica II]]

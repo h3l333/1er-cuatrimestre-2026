@@ -1,0 +1,1 @@
+- El 1er parcial es presencial.
