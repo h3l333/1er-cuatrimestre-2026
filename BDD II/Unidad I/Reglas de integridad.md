@@ -15,7 +15,7 @@ Ejemplos:
 *Cómo se implementan?*
 
 - CHECK constraints ([[CHECK constraints]])
-- Triggers
+- Triggers ([[Triggers]])
 - Procedimientos almacenados
 - Reglas de negocio en la app
 

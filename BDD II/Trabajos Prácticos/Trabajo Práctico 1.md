@@ -22,7 +22,3 @@ SET TERM ; ^ -- Esto le comunica al cliente que vuelva a cambiar el delimitador 
 - `AS BEGIN ... END` delimitan el bloque de código procedural que se ejecutará.
 
 Vale mencionar que se requiere emitir un error o excepción cuándo se pretende cambiar el valor de la columna ID:
-
-```
-CREATE EXCEPTION ex_prod1 -- Mensaje que luego puede ser 
-```
