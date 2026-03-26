@@ -1,6 +1,7 @@
 import {
 	splitStringUsingForLoop,
 	devolverClausura,
+	iterarDependencias,
 } from "./calculo-clausura-conjunto.js";
 
 const dependencias = [
@@ -28,37 +29,76 @@ const convertirFormatoEstandar = (dependencias, cubrimientoMinimal) => {
 	return cubrimientoMinimal;
 };
 
-const verificarRedundancias = (cubrimientoMinimal) => {
-	cubrimientoMinimal.forEach((dependencia) => {
-		// Para cada atributo a la izquierda analizar si es redundante. Si lo es, sacarlo
-		const atributosDependenciaIzq = splitStringUsingForLoop(
-			dependencia.split(" -> ")[0],
-			1,
-		);
-		for (let i = 0; i < atributosDependenciaIzq.length; i++) {
-			let determinantesSinAtr = atributosDependenciaIzq.filter(
-				(atr) => atr !== atributosDependenciaIzq[i],
-			);
-			if (
-				devolverClausura(dependencias, determinantesSinAtr).includes(
-					devolverClausura(dependencias, atributosDependenciaIzq),
-				)
-			) {
-				cubrimientoMinimal = cubrimientoMinimal.filter(dependencia);
-				cubrimientoMinimal.push(
-					`${determinantesSinAtr} -> ${dependencia.split(" -> ")[1]}`,
+const resolverTransitivas = (dependencias) => {
+	let resultado = [...dependencias];
+
+	for (let i = 0; i < dependencias.length; i++) {
+		let dependencia = dependencias[i];
+		let izq = dependencia.split(" -> ")[0];
+		let der = dependencia.split(" -> ")[1];
+
+		// Ver que atributos determina el lado derecho
+		let temp = resultado.filter((dep) => dep !== dependencia);
+		let clausura = devolverClausura(temp, izq);
+		for (let j = 0; j < temp.length; j++) {
+			if (dependencias.includes(`${izq} -> ${clausura[j]}`)) {
+				resultado = resultado.filter(
+					(dep) => dep !== `${izq} -> ${clausura[j]}`,
 				);
 			}
 		}
-	});
-	return cubrimientoMinimal;
+	}
+	return resultado;
 };
 
-const dependenciasTest = ["X -> ABC"];
+const verificarRedundancias = (cubrimientoMinimal) => {
+	let resultado = [...cubrimientoMinimal];
+
+	for (let i = 0; i < cubrimientoMinimal.length; i++) {
+		let dependencia = cubrimientoMinimal[i];
+		let [izq, derecha] = dependencia.split(" -> ");
+
+		let atributos = izq.split("");
+
+		for (let j = 0; j < atributos.length; j++) {
+			let sinAtr = atributos.filter((x, idx) => idx !== j);
+
+			let temp = resultado.filter((dep) => dep !== dependencia);
+			let clausura = devolverClausura(temp, sinAtr.join(""));
+			//console.log(devolverClausura(temp, sinAtr.join("")));
+
+			if (clausura.includes(derecha)) {
+				resultado = resultado.filter((dep) => dep !== dependencia);
+
+				const nuevaDep = `${sinAtr.join("")} -> ${derecha}`;
+
+				if (!resultado.includes(nuevaDep)) {
+					resultado.push(nuevaDep);
+				}
+				break;
+			}
+		}
+	}
+	return resultado;
+};
+
+const dependenciasTest = [
+	"A -> BC",
+	"B -> D",
+	"CD -> E",
+	"E -> F",
+	"AF -> D",
+	"C -> A",
+	"A -> D",
+];
 let cubrimientoMinimal = [];
-cubrimientoMinimal = verificarRedundancias(
-	convertirFormatoEstandar(dependenciasTest, cubrimientoMinimal),
+cubrimientoMinimal = resolverTransitivas(
+	verificarRedundancias(
+		convertirFormatoEstandar(dependenciasTest, cubrimientoMinimal),
+	),
 );
+
+console.log(cubrimientoMinimal);
 
 /*
 const calcularCubrimientoMinimal = (dependencias) => {

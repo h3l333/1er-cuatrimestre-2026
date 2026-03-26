@@ -6,7 +6,7 @@ export function splitStringUsingForLoop(str, n) {
 	return segments;
 }
 
-const iterarDependencias = (dependencias, clausuraAtributos) => {
+export const iterarDependencias = (dependencias, clausuraAtributos) => {
 	dependencias.forEach((dependencia) => {
 		// Chequeo si en la dependencia los caracteres a la izquierda estan todos en la clausura
 		// Extraigo caracteres a la izquierda
@@ -23,11 +23,13 @@ const iterarDependencias = (dependencias, clausuraAtributos) => {
 					clausuraAtributos.push(atr);
 				}
 			});
-			/*console.log(
+			/*
+			console.log(
 				"Lado derecho:",
 				splitStringUsingForLoop(dependencia.split(" -> ")[1], 1),
 			);
-			console.log("Clausura actual:", clausuraAtributos);*/
+			console.log("Clausura actual:", clausuraAtributos);
+			*/
 		}
 	});
 };
@@ -45,13 +47,6 @@ export const devolverClausura = (dependencias, atributos) => {
 	return clausuraAtributos;
 };
 
-const dependenciasTest = [
-	"A -> B",
-	"B -> C",
-	"AC -> D",
-	"D -> E",
-	"EF -> G",
-	"G -> H",
-];
-const atributosTest = "AE";
+const dependenciasTest = ["X -> ABC", "AB -> C", "A -> C"];
+const atributosTest = "A";
 console.log(devolverClausura(dependenciasTest, atributosTest));

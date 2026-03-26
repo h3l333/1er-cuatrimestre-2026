@@ -1,0 +1,124 @@
+CREATE TABLE FACTURA (
+    NRO INT PRIMARY KEY,
+    IMPORTE DOUBLE PRECISION
+);
+
+CREATE TABLE PRODUCTO (
+    ID INT PRIMARY KEY,
+    DESCRIPCION VARCHAR(255),
+    STOCK INT
+);
+
+CREATE TABLE DETALLE (
+    NRO INT,
+    ID INT,
+    CANT INT,
+    PRECIO DOUBLE PRECISION,
+    PRIMARY KEY (NRO, ID),
+    FOREIGN KEY (NRO) REFERENCES FACTURA(NRO),
+    FOREIGN KEY (ID) REFERENCES PRODUCTO(ID)
+);
+
+ALTER TABLE PRODUCTO
+ADD PRECIO_BASE DOUBLE PRECISION;
+
+ALTER TABLE PRODUCTO
+ADD PRECIO_COSTO DOUBLE PRECISION;
+
+ALTER TABLE FACTURA
+ADD ESTADO SMALLINT;
+
+ALTER TABLE FACTURA
+ADD FECHA DATE;
+
+CREATE EXCEPTION stock_insuficiente 'El stock es insuficiente.';
+
+SET TERM ^ ;
+CREATE TRIGGER BI_DETALLE FOR DETALLE
+BEFORE insert
+POSITION 0
+AS
+DECLARE VARIABLE stock_actual INT;
+BEGIN
+    SELECT STOCK FROM PRODUCTO
+    WHERE ID = NEW.ID
+    INTO :stock_actual;
+    
+    IF (stock_actual IS NULL OR NEW.CANT > stock_actual) then
+        EXCEPTION stock_insuficiente;
+        
+    UPDATE PRODUCTO
+    SET STOCK = STOCK - NEW.CANT
+    WHERE ID = NEW.ID;
+END^
+SET TERM ; ^
+
+-- Valido 1er trigger
+
+INSERT INTO FACTURA (NRO, IMPORTE, ESTADO)
+VALUES (5, 1000, 2);
+
+INSERT INTO DETALLE (NRO, ID, CANT, PRECIO)
+VALUES (5, 1, 2, 40);
+
+-- 2do ejercicio
+
+CREATE GENERATOR gen_id_prod;
+
+SET GENERATOR gen_id_prod TO 100;
+
+SET TERM ^ ;
+CREATE TRIGGER BI_PRODUCTO FOR PRODUCTO
+BEFORE insert
+AS 
+begin
+    IF (NEW.ID IS NULL) then
+        NEW.ID = GEN_ID(gen_id_prod, 1);
+END^
+SET TERM ; ^
+
+-- Genero una factura cada vez que se inserta un detalle
+
+SET TERM ^ ;
+
+CREATE TRIGGER AI_DETALLE FOR DETALLE
+AFTER insert
+POSITION 0
+AS
+DECLARE VARIABLE nro_factura INT;
+DECLARE VARIABLE importe DOUBLE PRECISION;
+DECLARE VARIABLE existe INT;
+begin
+    nro_factura = NEW.NRO;
+    importe = NEW.CANT * NEW.PRECIO;
+    
+    SELECT 1 FROM FACTURA
+    WHERE NRO = :nro_factura
+    INTO :existe;
+    
+    IF (existe IS NULL) then
+    begin
+        INSERT INTO FACTURA (NRO, IMPORTE)
+        VALUES(:nro_factura, :importe);
+    END 
+    else
+    begin
+        UPDATE FACTURA
+        SET IMPORTE = IMPORTE + :importe
+        WHERE NRO = :nro_factura;
+    end
+end^
+
+SET TERM ; ^
+
+-- Test del trigger
+
+UPDATE PRODUCTO
+SET STOCK = STOCK + 5
+WHERE ID = 1;
+
+INSERT INTO FACTURA (NRO)
+VALUES(100);
+
+INSERT INTO DETALLE (NRO, ID, CANT, PRECIO) 
+VALUES (100, 1, 3, 100);

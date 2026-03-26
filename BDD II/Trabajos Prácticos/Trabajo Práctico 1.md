@@ -21,4 +21,4 @@ SET TERM ; ^ -- Esto le comunica al cliente que vuelva a cambiar el delimitador 
 - `POSITION 0` define el orden de ejecución. Si tuvieras varios triggers para el mismo evento (`BEFORE INSERT`), el de posición `0` se ejecuta primero.
 - `AS BEGIN ... END` delimitan el bloque de código procedural que se ejecutará.
 
-Vale mencionar que se requiere emitir un error o excepción cuándo se pretende cambiar el valor de la columna ID:
+Realización práctica del ejercicio: 
