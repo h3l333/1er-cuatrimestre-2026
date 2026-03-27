@@ -1,1 +1,0 @@
-![[consigna1.png]]

@@ -3,7 +3,6 @@ Escribir expresiones regulares que definan los siguientes lenguajes:
 1. Codigos postales. 
 
 ![[lenguajes-regulares.png]]
-
 ![[verificacion-lenguaje.png]]
 
 >Un lenguaje puede ser infinito y regular. La regularidad no se trata de la cantidad de cadenas que contiene sino si un autómata finito lo puede reconocer o no.
