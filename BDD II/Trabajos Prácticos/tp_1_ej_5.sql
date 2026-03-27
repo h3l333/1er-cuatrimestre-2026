@@ -1,124 +1,89 @@
-CREATE TABLE FACTURA (
-    NRO INT PRIMARY KEY,
-    IMPORTE DOUBLE PRECISION
-);
+SET TERM ^;
 
-CREATE TABLE PRODUCTO (
-    ID INT PRIMARY KEY,
-    DESCRIPCION VARCHAR(255),
-    STOCK INT
-);
-
-CREATE TABLE DETALLE (
-    NRO INT,
-    ID INT,
-    CANT INT,
-    PRECIO DOUBLE PRECISION,
-    PRIMARY KEY (NRO, ID),
-    FOREIGN KEY (NRO) REFERENCES FACTURA(NRO),
-    FOREIGN KEY (ID) REFERENCES PRODUCTO(ID)
-);
-
-ALTER TABLE PRODUCTO
-ADD PRECIO_BASE DOUBLE PRECISION;
-
-ALTER TABLE PRODUCTO
-ADD PRECIO_COSTO DOUBLE PRECISION;
-
-ALTER TABLE FACTURA
-ADD ESTADO SMALLINT;
-
-ALTER TABLE FACTURA
-ADD FECHA DATE;
-
-CREATE EXCEPTION stock_insuficiente 'El stock es insuficiente.';
-
-SET TERM ^ ;
-CREATE TRIGGER BI_DETALLE FOR DETALLE
-BEFORE insert
-POSITION 0
+CREATE TRIGGER trg_bi_factura_fecha FOR FACTURA
+ACTIVE BEFORE INSERT POSITION 1
 AS
-DECLARE VARIABLE stock_actual INT;
-BEGIN
-    SELECT STOCK FROM PRODUCTO
-    WHERE ID = NEW.ID
-    INTO :stock_actual;
-    
-    IF (stock_actual IS NULL OR NEW.CANT > stock_actual) then
-        EXCEPTION stock_insuficiente;
-        
-    UPDATE PRODUCTO
-    SET STOCK = STOCK - NEW.CANT
-    WHERE ID = NEW.ID;
-END^
-SET TERM ; ^
-
--- Valido 1er trigger
-
-INSERT INTO FACTURA (NRO, IMPORTE, ESTADO)
-VALUES (5, 1000, 2);
-
-INSERT INTO DETALLE (NRO, ID, CANT, PRECIO)
-VALUES (5, 1, 2, 40);
-
--- 2do ejercicio
-
-CREATE GENERATOR gen_id_prod;
-
-SET GENERATOR gen_id_prod TO 100;
-
-SET TERM ^ ;
-CREATE TRIGGER BI_PRODUCTO FOR PRODUCTO
-BEFORE insert
-AS 
+DECLARE VARIABLE fecha_fact_previa DATE;
 begin
-    IF (NEW.ID IS NULL) then
-        NEW.ID = GEN_ID(gen_id_prod, 1);
+    SELECT fecha FROM FACTURA
+    WHERE nro_factura = (NEW.NRO_FACTURA - 1)
+    INTO :fecha_fact_previa;
+    
+    IF(:fecha_fact_previa > NEW.FECHA) THEN
+        EXCEPTION FECHA_FACTURA_ERRONEA;
 END^
-SET TERM ; ^
 
--- Genero una factura cada vez que se inserta un detalle
+SET TERM ;^
 
-SET TERM ^ ;
+-- Consultas
 
-CREATE TRIGGER AI_DETALLE FOR DETALLE
-AFTER insert
-POSITION 0
+SET TERM ^;
+
+-- 'SP' solo quiere decir 'stored procedure'
+CREATE PROCEDURE SP_FACT_POR_RANGO (
+    in_desde DOUBLE PRECISION,
+    in_hasta DOUBLE PRECISION
+)
+RETURNS (
+    OUT_NRO_FACTURA INT,
+    OUT_FECHA DATE,
+    OUT_ESTADO SMALLINT,
+    OUT_IMPORTE DOUBLE PRECISION
+)
 AS
-DECLARE VARIABLE nro_factura INT;
-DECLARE VARIABLE importe DOUBLE PRECISION;
-DECLARE VARIABLE existe INT;
 begin
-    nro_factura = NEW.NRO;
-    importe = NEW.CANT * NEW.PRECIO;
-    
-    SELECT 1 FROM FACTURA
-    WHERE NRO = :nro_factura
-    INTO :existe;
-    
-    IF (existe IS NULL) then
+    FOR SELECT nro_factura, fecha, estado, importe
+        FROM factura
+        WHERE importe BETWEEN :in_desde AND :in_hasta
+        INTO :out_nro_factura, :out_fecha, :out_estado, :out_importe
+    DO
     begin
-        INSERT INTO FACTURA (NRO, IMPORTE)
-        VALUES(:nro_factura, :importe);
-    END 
-    else
-    begin
-        UPDATE FACTURA
-        SET IMPORTE = IMPORTE + :importe
-        WHERE NRO = :nro_factura;
+        suspend;
+        -- suspend es el comando que "empuja" la fila actual a la pantalla del usuario
     end
-end^
+END^
 
-SET TERM ; ^
+SET TERM ;^
 
--- Test del trigger
+-- 2do stored procedure
 
-UPDATE PRODUCTO
-SET STOCK = STOCK + 5
-WHERE ID = 1;
+SET TERM ^;
 
-INSERT INTO FACTURA (NRO)
-VALUES(100);
+CREATE PROCEDURE SP_FACT_POR_RANGO_2 (
+    in_desde DOUBLE PRECISION,
+    in_hasta DOUBLE PRECISION
+)
+RETURNS (
+    OUT_NRO_FACTURA INT,
+    OUT_FECHA DATE,
+    OUT_ESTADO SMALLINT,
+    OUT_IMPORTE DOUBLE PRECISION
+)
+AS
+begin
+    IF (in_desde IS null) then
+    begin
+        SELECT MIN(importe) 
+        FROM FACTURA 
+        INTO :in_desde;
+    end
+    
+    IF(in_hasta IS NULL) then
+    begin
+        SELECT MAX(importe)
+        FROM FACTURA
+        INTO :in_hasta;
+    end
+    
+    FOR SELECT nro_factura, fecha, estado, importe
+        FROM factura
+        WHERE importe BETWEEN :in_desde AND :in_hasta
+        INTO :out_nro_factura, :out_fecha, :out_estado, :out_importe
+    DO
+    begin
+        suspend;
+        -- suspend es el comando que "empuja" la fila actual a la pantalla del usuario
+    end
+END^
 
-INSERT INTO DETALLE (NRO, ID, CANT, PRECIO) 
-VALUES (100, 1, 3, 100);
+SET TERM ;^
