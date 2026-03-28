@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Postulación de Práctica Profesional</title>
+		<style>
+			:root {
+				--primary: #2c3e50;
+				--accent: #3498db;
+				--bg: #f4f7f6;
+			}
+
+			body {
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+				background-color: var(--bg);
+				color: var(--primary);
+				display: flex;
+				justify-content: center;
+				padding: 20px;
+			}
+
+			.container {
+				background: white;
+				padding: 30px;
+				border-radius: 8px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				max-width: 600px;
+				width: 100%;
+			}
+
+			h2 {
+				border-bottom: 2px solid var(--accent);
+				padding-bottom: 10px;
+			}
+
+			.form-group {
+				margin-bottom: 15px;
+			}
+
+			label {
+				display: block;
+				margin-bottom: 5px;
+				font-weight: bold;
+			}
+
+			input[type="text"],
+			input[type="date"],
+			select,
+			textarea {
+				width: 100%;
+				padding: 10px;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				box-sizing: border-box; /* Evita que el padding ensanche el input */
+			}
+
+			.row {
+				display: flex;
+				gap: 10px;
+			}
+			.row div {
+				flex: 1;
+			}
+
+			.btn-submit {
+				background-color: var(--accent);
+				color: white;
+				border: none;
+				padding: 12px 20px;
+				border-radius: 4px;
+				cursor: pointer;
+				width: 100%;
+				font-size: 16px;
+				margin-top: 20px;
+			}
+
+			.btn-submit:hover {
+				background-color: #2980b9;
+			}
+
+			.note {
+				font-size: 0.85em;
+				color: #666;
+				margin-top: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h2>Postulación a Práctica Profesional</h2>
+			<p>Complete los datos para registrar su postulación en el sistema.</p>
+
+			<form action="#" method="POST">
+				<div class="form-group">
+					<label for="practica">Seleccionar Práctica Disponible</label>
+					<select id="practica" required>
+						<option value="">-- Seleccione una opción --</option>
+						<option value="1">
+							Desarrollo Web - Tech Corp (Convenio Vigente)
+						</option>
+						<option value="2">
+							Análisis de Datos - Data Solutions (Convenio Vigente)
+						</option>
+						<option value="3">
+							Ciberseguridad - Secure Net (Convenio Vigente)
+						</option>
+					</select>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label for="fecha-inicio">Fecha de Inicio</label>
+						<input type="date" id="fecha-inicio" required />
+					</div>
+					<div class="form-group">
+						<label for="fecha-fin">Fecha de Fin</label>
+						<input type="date" id="fecha-fin" required />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="tutor">Asignar Tutor Académico</label>
+					<select id="tutor" required>
+						<option value="">-- Tutores propuestos por el sistema --</option>
+						<option value="t1">Ing. Alberto García (Validado)</option>
+						<option value="t2">Dra. Marta Rodríguez (Validado)</option>
+					</select>
+					<p class="note">
+						El tutor seleccionado pasará por un proceso de validación de
+						credenciales.
+					</p>
+				</div>
+
+				<div class="form-group">
+					<label for="cv">Cargar Curriculum Vitae (PDF)</label>
+					<input type="file" id="cv" accept=".pdf" required />
+				</div>
+
+				<div class="form-group">
+					<label for="comentarios">Información Adicional</label>
+					<textarea
+						id="comentarios"
+						rows="3"
+						placeholder="Detalle cualquier información relevante..."
+					></textarea>
+				</div>
+
+				<div
+					style="
+						background: #eef2f3;
+						padding: 10px;
+						border-radius: 4px;
+						margin-bottom: 15px;
+					"
+				>
+					<p style="margin: 0; font-size: 0.9em">
+						<strong>Info:</strong> Al confirmar, el sistema asignará
+						automáticamente un responsable de la empresa tras validar sus
+						credenciales.
+					</p>
+				</div>
+
+				<button type="submit" class="btn-submit">Confirmar y Postularse</button>
+			</form>
+		</div>
+	</body>
+</html>
