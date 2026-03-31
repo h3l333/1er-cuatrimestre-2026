@@ -25,6 +25,10 @@ const convertirFormatoEstandar = (dependencias, cubrimientoMinimal) => {
 				cubrimientoMinimal.push(`${dependencia.split(" -> ")[0]} -> ${atr}`);
 			}
 		});
+		// Eliminar si tiene mas de dos atributos a la izquierda
+		let izquierda = splitStringUsingForLoop(dependencia.split(" -> ")[0], 1);
+		if (izquierda.length > 1)
+			cubrimientoMinimal.filter((dep) => dep != dependencia);
 	});
 	return cubrimientoMinimal;
 };
@@ -37,17 +41,46 @@ const resolverTransitivas = (dependencias) => {
 		let izq = dependencia.split(" -> ")[0];
 		let der = dependencia.split(" -> ")[1];
 
-		// Ver que atributos determina el lado derecho
-		let temp = resultado.filter((dep) => dep !== dependencia);
-		let clausura = devolverClausura(temp, izq);
-		for (let j = 0; j < temp.length; j++) {
-			if (dependencias.includes(`${izq} -> ${clausura[j]}`)) {
+		// Ver que atributos determina el lado derecho, filtro por el atributo "mismo"
+		let clausuraDer = devolverClausura(dependencias, der).filter(
+			(atr) => atr != der,
+		);
+		//console.log("Clausula der: ", clausuraDer);
+		// Para cada atributo en la clausura, si existe en 'dependencias' una dependencia tal que izq -> atr. der, eliminarla
+		for (let j = 0; j < clausuraDer.length; j++) {
+			if (dependencias.includes(`${izq} -> ${clausuraDer[j]}`)) {
 				resultado = resultado.filter(
-					(dep) => dep !== `${izq} -> ${clausura[j]}`,
+					(dep) => dep != `${izq} -> ${clausuraDer[j]}`,
 				);
+				//console.log("Resultado: ", resultado);
 			}
 		}
 	}
+	return resultado;
+};
+
+// Si dentro de unos atributos determinantes, un atributo determina a otro o a los otros, sacar los innecesarios
+
+const eliminarDeterminantesAutodeterminantes = (cubrimientoMinimal) => {
+	let resultado = [...cubrimientoMinimal];
+
+	for (let i = 0; i < cubrimientoMinimal.length; i++) {
+		let izq = cubrimientoMinimal[i].split(" -> ")[0];
+		let nuevaDep = cubrimientoMinimal[i];
+		for (let j = 0; j < izq.length; j++) {
+			let clausuraAtr = devolverClausura(cubrimientoMinimal, izq[j]);
+			for (let h = 0; h < izq.length; h++) {
+				if (
+					izq[h] != izq[j] &&
+					clausuraAtr.includes[izq[h]]
+				) // Saco el atributo que el atributo determina
+				{
+					nuevaDep = `${[...izq].filter((atr) => atr != izq[h]).join("")}`;
+				}
+			}
+		}
+	}
+
 	return resultado;
 };
 
@@ -82,21 +115,24 @@ const verificarRedundancias = (cubrimientoMinimal) => {
 	return resultado;
 };
 
-const dependenciasTest = [
+const dependenciasTest = /*[
 	"A -> BC",
-	"B -> D",
-	"CD -> E",
+	"B -> C",
+	"A -> B",
+	"AB -> D",
+	"D -> E",
+	"A -> E",
 	"E -> F",
-	"AF -> D",
-	"C -> A",
-	"A -> D",
-];
+	"AF -> G",
+];*/ ["ABC -> D", "A -> B", "A -> C"];
 let cubrimientoMinimal = [];
-cubrimientoMinimal = resolverTransitivas(
-	verificarRedundancias(
-		convertirFormatoEstandar(dependenciasTest, cubrimientoMinimal),
-	),
+cubrimientoMinimal = convertirFormatoEstandar(
+	dependenciasTest,
+	cubrimientoMinimal,
 );
+cubrimientoMinimal = verificarRedundancias(cubrimientoMinimal);
+cubrimientoMinimal = resolverTransitivas(cubrimientoMinimal);
+cubrimientoMinimal = eliminarDeterminantesAutodeterminantes(cubrimientoMinimal);
 
 console.log(cubrimientoMinimal);
 

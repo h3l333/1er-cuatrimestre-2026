@@ -1,0 +1,2 @@
+We can grant, in Firebird, permissions to different users or roles to perform different operations on different tables.
+A user needs to be granted perms for each table, as well as the triggers associated (since triggers often imply operations on other tables).

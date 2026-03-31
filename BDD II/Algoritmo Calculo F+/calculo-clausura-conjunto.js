@@ -49,4 +49,4 @@ export const devolverClausura = (dependencias, atributos) => {
 
 const dependenciasTest = ["X -> ABC", "AB -> C", "A -> C"];
 const atributosTest = "A";
-console.log(devolverClausura(dependenciasTest, atributosTest));
+//console.log(devolverClausura(dependenciasTest, atributosTest));
