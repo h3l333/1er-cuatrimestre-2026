@@ -1,2 +1,3 @@
-We can grant, in Firebird, permissions to different users or roles to perform different operations on different tables.
+We can grant, in Firebird, permissions to different users or roles to perform different operations on different tables (Components associated to relational schemas. These relational schemas can be governed by a set of semantic rules that ensures data integrity and easy data retrieval ([[Reglas de integridad]])).
+
 A user needs to be granted perms for each table, as well as the triggers associated (since triggers often imply operations on other tables).

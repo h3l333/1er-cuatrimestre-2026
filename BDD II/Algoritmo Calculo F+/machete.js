@@ -1,49 +1,60 @@
-import {
-	splitStringUsingForLoop,
-	devolverClausura,
-	iterarDependencias,
-} from "./calculo-clausura-conjunto.js";
+// A canonical or minimal cover in DBMS is the simplest set of functional dependencies equivalent to
+// a given set.
+// It is found by splitting right-hand sides, removing redundant functional dependencies
+// and eliminating extraneous left-hand attributes.
+//
+// - Examples of redundant dependencies: In {A -> B, B -> C, A -> C} 'A -> C' is redundant.
+// - It is determined if a left-hand attribute is extraneous by checking the
+// attributes that each individual attribute on the LHS determines.
 
-const eliminarDeterminantesAutodeterminantes = (cubrimientoMinimal) => {
-	let resultado = [...cubrimientoMinimal];
+// A set of FDs is defined as an array of objects that encompass the attributes
+// LHS and RHS. Each attribute holds the value of an array of chars representing attributes.
+const setOfFDs = [
+	{ lhs: ["A", "C"], rhs: ["D"] },
+	{ lhs: ["A"], rhs: ["D"] },
+	{ lhs: ["B"], rhs: ["H"] },
+	{ lhs: ["B", "D"], rhs: ["C", "F"] },
+];
 
-	for (let i = 0; i < cubrimientoMinimal.length; i++) {
-		let izq = cubrimientoMinimal[i].split(" -> ")[0];
-		for (let j = 0; j < izq.length; j++) {
-			let clausuraAtr = devolverClausura(cubrimientoMinimal, izq[j]);
-			for (let h = 0; h < izq.length; h++) {
-				let temp = [...izq];
-				if (
-					izq[h] != izq[j] &&
-					clausuraAtr.includes(izq[h])
-				) // Saco el atributo que el atributo determina
-				{
-					temp = temp.filter((atr) => atr != izq[h]).join("");
-				}
-			}
-		}
-		let nuevaDep = `${izq} -> ${cubrimientoMinimal[i].split(" -> ")[1]}`;
-		resultado.push(nuevaDep);
-		resultado = resultado.filter(
-			(dep) => dep != `${izq} => ${cubrimientoMinimal[i].split(" -> ")[1]}`,
-		);
+const haveSameElements = (arr1, arr2) => {
+	// Receives and compares two arrays
+	let match = true;
+	for (
+		let i = 0;
+		i < arr2.length;
+		i++ // Iterate through arr2's elements
+	) // Does arr1 include all the elements in arr2?
+	{
+		match = match && arr1.includes(arr2[i]);
 	}
 
-	return resultado;
+	for (let j = 0; j < arr1.length; j++) {
+		match = match && arr2.includes(arr1[j]);
+	}
+	return match;
 };
 
-const dependenciasTest = /*[
-	"A -> BC",
-	"B -> C",
-	"A -> B",
-	"AB -> D",
-	"D -> E",
-	"A -> E",
-	"E -> F",
-	"AF -> G",
-];*/ ["ABC -> D", "A -> B", "A -> C"];
+let arr1 = [1, 2, 3];
+let arr2 = [3, 1, 4, 2];
 
-let cubrimientoMinimal =
-	eliminarDeterminantesAutodeterminantes(dependenciasTest);
+console.log(haveSameElements(arr1, arr2));
 
-console.log(cubrimientoMinimal);
+console.log();
+/*
+const calculateClosure = (attributes, setOfFDs) => {
+	// Receives an array of chars representing a set of attributes and an array of
+	// objects representing a set of FDs
+	let closure = [...attributes]; // Example: AB -> A, AB -> B
+	for(let i = 0; i < setOfFDs.length; i++) // Traverse each FD within the set
+	{
+		let currentDependency = setOfFDs[i];
+		if(haveSameElements(currentDependency[i].lhs, attributes)) // Check that the lhs of a dependency matches the passed attributes 
+	}
+};
+
+const removeExtraneousAttributes = (setOfFDs) => {
+	let dependenciesNoExtraneous = setOfFDs;
+	
+	return dependenciesNoExtraneous;
+};
+*/

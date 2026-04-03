@@ -16,3 +16,4 @@ Reminder: Kleene's closure of a language L is denoted as L* and represents the s
 - Set of "building blocks" used to turn a regular expression into a Non-deterministic Finite Automaton. It simplifies the "verification" of a string in any given language through modularization.
 
 ([[Practica III Solución]])
+([[Corrección Ej. III]])

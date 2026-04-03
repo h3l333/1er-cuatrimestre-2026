@@ -9,4 +9,7 @@ The minimal cover Fmin of a set of functional dependencies F satisfies the follo
    
    - Suppose "X'" just means "a subset of X that results when removing an attribute we are 'testing for'".
    - From X', using the functional dependencies contained in F, we test what attributes we can obtain.
+
+Algoritmo de Juanca para su obtención:
+![[algoritmo-juanca.png]]
    
