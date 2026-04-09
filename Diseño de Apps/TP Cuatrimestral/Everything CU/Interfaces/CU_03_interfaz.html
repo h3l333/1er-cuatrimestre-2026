@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Consultar Estado - Gestión de Prácticas UPPA</title>
+		<style>
+			:root {
+				--primary-dark: #1a1c2c;
+				--accent-blue: #4a90e2;
+				--bg-gray: #f4f7f6;
+				--text-gray: #666;
+				--white: #ffffff;
+			}
+
+			body {
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+				background-color: var(--bg-gray);
+				margin: 0;
+				padding: 20px;
+			}
+
+			/* Header similar al ejemplo */
+			.header {
+				background: linear-gradient(90deg, #1a1c2c 0%, #2a2d3e 100%);
+				color: white;
+				padding: 20px 40px;
+				border-radius: 15px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 25px;
+			}
+
+			.header h1 {
+				margin: 0;
+				font-size: 1.5rem;
+			}
+			.user-id {
+				font-size: 0.8rem;
+				opacity: 0.8;
+				text-align: right;
+			}
+
+			/* Navegación de pestañas */
+			.nav-tabs {
+				margin-bottom: 20px;
+				display: flex;
+				gap: 10px;
+			}
+
+			.tab {
+				padding: 10px 20px;
+				border-radius: 8px;
+				border: none;
+				cursor: pointer;
+				font-weight: bold;
+			}
+
+			.tab-inactive {
+				background: white;
+				color: var(--text-gray);
+			}
+			.tab-active {
+				background: var(--primary-dark);
+				color: white;
+			}
+
+			/* Contenedor principal */
+			.main-container {
+				display: grid;
+				grid-template-columns: 2fr 1fr;
+				gap: 20px;
+			}
+
+			.card {
+				background: white;
+				padding: 25px;
+				border-radius: 15px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+			}
+
+			.card-title {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-bottom: 20px;
+				color: var(--primary-dark);
+			}
+
+			/* Grid de datos de la práctica */
+			.info-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+			}
+
+			.info-item {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.label {
+				font-size: 0.85rem;
+				color: var(--text-gray);
+				margin-bottom: 5px;
+			}
+
+			.value {
+				font-weight: 600;
+				color: #333;
+			}
+
+			/* Badge de Estado */
+			.status-badge {
+				display: inline-block;
+				padding: 6px 12px;
+				border-radius: 20px;
+				background-color: #e3f2fd;
+				color: #1976d2;
+				font-size: 0.9rem;
+				font-weight: bold;
+				border: 1px solid #1976d2;
+			}
+
+			/* Sidebar lateral */
+			.sidebar-card {
+				background: white;
+				padding: 20px;
+				border-radius: 15px;
+				margin-bottom: 20px;
+			}
+
+			.sidebar-title {
+				font-size: 0.9rem;
+				font-weight: bold;
+				color: var(--text-gray);
+				margin-bottom: 15px;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+
+			.status-update {
+				font-size: 0.8rem;
+				color: #888;
+				border-left: 2px solid var(--accent-blue);
+				padding-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header">
+			<div>
+				<div style="font-size: 0.7rem; opacity: 0.7">
+					PERSISTENCIA ACTIVA (FIRESTORE)
+				</div>
+				<h1>Gestión de Prácticas UPPA</h1>
+			</div>
+			<div class="user-id">
+				ID Usuario<br />
+				<strong>01087700...</strong>
+			</div>
+		</header>
+
+		<div class="nav-tabs">
+			<button class="tab tab-inactive">Registrar Práctica</button>
+			<button class="tab tab-active">Consultar Estado</button>
+			<button class="tab tab-inactive">Registrar Informe</button>
+		</div>
+
+		<main class="main-container">
+			<!-- Detalle de la Práctica (CU-03) -->
+			<section class="card">
+				<div class="card-title">
+					<span>📋</span> Detalle de Práctica Profesional
+				</div>
+
+				<div class="info-grid">
+					<div class="info-item">
+						<span class="label">Estado Actual</span>
+						<div><span class="status-badge">En Curso / Activa</span></div>
+					</div>
+					<div class="info-item">
+						<span class="label">Empresa</span>
+						<span class="value">Tech Solutions S.A.</span>
+					</div>
+					<div class="info-item">
+						<span class="label">Convenio</span>
+						<span class="value">Marco de Pasantías 2024</span>
+					</div>
+					<div class="info-item">
+						<span class="label">Responsable</span>
+						<span class="value">Ing. Carlos Giménez</span>
+					</div>
+					<div class="info-item">
+						<span class="label">Tutor Asignado</span>
+						<span class="value">Dra. Mariana Benitez</span>
+					</div>
+					<div class="info-item">
+						<span class="label">Fecha Inicio</span>
+						<span class="value">01/03/2026</span>
+					</div>
+					<div class="info-item">
+						<span class="label">Fecha Fin (Estimada)</span>
+						<span class="value">01/09/2026</span>
+					</div>
+				</div>
+			</section>
+
+			<!-- Sidebar Informativo -->
+			<aside>
+				<div class="sidebar-card">
+					<div class="sidebar-title">📄 Documentación</div>
+					<p style="font-size: 0.85rem; color: #666">
+						Todos los documentos del convenio han sido validados correctamente.
+					</p>
+				</div>
+
+				<div class="sidebar-card">
+					<div class="sidebar-title">☁️ Bitácora Cloud</div>
+					<div class="status-update">
+						Sistema conectado. Datos sincronizados hace 2 minutos.
+					</div>
+				</div>
+			</aside>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: #f4f7f6;
+				font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+			}
+			.email-container {
+				max-width: 600px;
+				margin: 20px auto;
+				background-color: #ffffff;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+			}
+			.header {
+				background: #1a1c2c linear-gradient(90deg, #1a1c2c 0%, #2a2d3e 100%);
+				color: #ffffff;
+				padding: 30px;
+				text-align: center;
+			}
+			.header h1 {
+				margin: 0;
+				font-size: 1.4rem;
+				letter-spacing: 1px;
+			}
+			.header-sub {
+				font-size: 0.7rem;
+				opacity: 0.7;
+				text-transform: uppercase;
+				margin-bottom: 5px;
+			}
+			.body-content {
+				padding: 30px;
+				color: #333333;
+			}
+			.welcome-text {
+				font-size: 1.1rem;
+				font-weight: bold;
+				color: #1a1c2c;
+				margin-bottom: 15px;
+			}
+			.info-card {
+				background-color: #f8f9fa;
+				border-radius: 12px;
+				padding: 20px;
+				border-left: 4px solid #4a90e2;
+				margin: 20px 0;
+			}
+			.info-row {
+				margin-bottom: 12px;
+				border-bottom: 1px solid #eeeeee;
+				padding-bottom: 8px;
+			}
+			.info-row:last-child {
+				border: none;
+			}
+			.label {
+				font-size: 0.75rem;
+				color: #666;
+				text-transform: uppercase;
+				display: block;
+			}
+			.value {
+				font-size: 0.95rem;
+				font-weight: 600;
+				color: #2a2d3e;
+			}
+			.cta-button {
+				display: block;
+				text-align: center;
+				background-color: #1a1c2c;
+				color: #ffffff !important;
+				text-decoration: none;
+				padding: 15px 25px;
+				border-radius: 8px;
+				font-weight: bold;
+				margin: 30px 0;
+			}
+			.footer {
+				background-color: #eeeeee;
+				padding: 20px;
+				text-align: center;
+				font-size: 0.8rem;
+				color: #888;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="email-container">
+			<div class="header">
+				<div class="header-sub">Sistema de Notificaciones Automáticas</div>
+				<h1>Gestión de Prácticas UPPA</h1>
+			</div>
+
+			<div class="body-content">
+				<div class="welcome-text">
+					Confirmación de Alta de Práctica Profesional
+				</div>
+				<p>
+					Se ha registrado exitosamente una nueva práctica profesional en el
+					sistema. A continuación, se detallan los datos vinculados:
+				</p>
+
+				<div class="info-card">
+					<div class="info-row">
+						<span class="label">Alumno</span>
+						<span class="value">Ana Pérez (ID: 01087700)</span>
+					</div>
+					<div class="info-row">
+						<span class="label">Empresa / Institución</span>
+						<span class="value">Tech Solutions S.A.</span>
+					</div>
+					<div class="info-row">
+						<span class="label">Tutor Académico (UPPA)</span>
+						<span class="value">Dra. Mariana Benitez</span>
+					</div>
+					<div class="info-row">
+						<span class="label">Responsable de Empresa</span>
+						<span class="value">Ing. Carlos Giménez</span>
+					</div>
+					<div class="info-row">
+						<span class="label">Período</span>
+						<span class="value">01/03/2026 al 01/09/2026</span>
+					</div>
+				</div>
+
+				<p style="font-size: 0.9rem; color: #555">
+					A partir de este momento, el Tutor y el Responsable podrán ingresar al
+					sistema para registrar los informes de avance mensuales.
+				</p>
+
+				<a href="#" class="cta-button">Acceder al Sistema de Gestión</a>
+			</div>
+
+			<!-- Footer -->
+			<div class="footer">
+				Este es un mensaje automático enviado por el Sistema de Gestión de
+				Prácticas UPPA.<br />
+			</div>
+		</div>
+	</body>
+</html>

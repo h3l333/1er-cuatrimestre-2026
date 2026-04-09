@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: #f4f7f6;
+				font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+			}
+			.email-container {
+				max-width: 600px;
+				margin: 20px auto;
+				background-color: #ffffff;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+			}
+			.header {
+				background: #1a1c2c linear-gradient(90deg, #1a1c2c 0%, #3e2a2a 100%);
+				color: #ffffff;
+				padding: 30px;
+				text-align: center;
+			}
+			.header h1 {
+				margin: 0;
+				font-size: 1.4rem;
+				letter-spacing: 1px;
+			}
+			.alert-tag {
+				background-color: #f39c12;
+				color: white;
+				padding: 4px 10px;
+				border-radius: 4px;
+				font-size: 0.7rem;
+				font-weight: bold;
+				display: inline-block;
+				margin-bottom: 10px;
+			}
+			.body-content {
+				padding: 30px;
+				color: #333333;
+			}
+			.info-card {
+				background-color: #fff9f0;
+				border-radius: 12px;
+				padding: 20px;
+				border-left: 4px solid #f39c12;
+				margin: 20px 0;
+			}
+			.info-row {
+				margin-bottom: 12px;
+				border-bottom: 1px solid #f2e6d5;
+				padding-bottom: 8px;
+			}
+			.label {
+				font-size: 0.75rem;
+				color: #7f8c8d;
+				text-transform: uppercase;
+				display: block;
+			}
+			.value {
+				font-size: 0.95rem;
+				font-weight: 600;
+				color: #2c3e50;
+			}
+			.cta-button {
+				display: block;
+				text-align: center;
+				background-color: #f39c12;
+				color: #ffffff !important;
+				text-decoration: none;
+				padding: 15px 25px;
+				border-radius: 8px;
+				font-weight: bold;
+				margin: 30px 0;
+			}
+			.footer {
+				background-color: #eeeeee;
+				padding: 20px;
+				text-align: center;
+				font-size: 0.8rem;
+				color: #888;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="email-container">
+			<div class="header">
+				<div class="alert-tag">AVISO DE VENCIMIENTO</div>
+				<h1>Gestión de Prácticas UPPA</h1>
+			</div>
+
+			<div class="body-content">
+				<h2 style="color: #d35400; margin-top: 0">
+					Atención: Convenio próximo a expirar
+				</h2>
+				<p>
+					Se ha detectado que el convenio de colaboración con la siguiente
+					entidad está próximo a su fecha de finalización:
+				</p>
+
+				<div class="info-card">
+					<div class="info-row">
+						<span class="label">Empresa / Institución</span>
+						<span class="value">Tech Solutions S.A.</span>
+					</div>
+					<div class="info-row">
+						<span class="label">CUIT</span>
+						<span class="value">30-71234567-8</span>
+					</div>
+					<div class="info-row">
+						<span class="label">Fecha de Vencimiento</span>
+						<span class="value" style="color: #e67e22"
+							>07/05/2026 (En 30 días)</span
+						>
+					</div>
+					<div class="info-row">
+						<span class="label">Responsable</span>
+						<span class="value">Ing. Carlos Giménez</span>
+					</div>
+				</div>
+
+				<p style="font-size: 0.9rem; color: #555">
+					Es necesario iniciar el trámite de renovación para asegurar que los
+					alumnos actualmente asignados puedan finalizar sus prácticas sin
+					inconvenientes administrativos.
+				</p>
+
+				<a href="#" class="cta-button">Gestionar Renovación de Convenio</a>
+			</div>
+
+			<div class="footer">Este es un aviso automático de preventivo.<br /></div>
+		</div>
+	</body>
+</html>

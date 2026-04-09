@@ -237,33 +237,94 @@ const attributeOnlyLHS = (attribute, setOfFDs) => {
 	return onlyLHS;
 };
 
-const getCandidateKeys = (relationalSchema, setOfFDs) => {
-	let base = [];
-	let possibleCandidates = [];
+const getSubsets = (arr) => {
+	// For each attribute, I have a choice: to either include it or not
+	// console.log("arr: ", arr);
+	if (arr.length === 0) return [[]];
 
-	// 1st optimization: Attributes that only appear on LHS = part of CK
-	// 2nd optimization: Attributes that only appear on RHS = never a part of CK
-	// 3rd: If they appear in both, can be or not be
+	let first = arr[0];
+	let rest = arr.slice(1);
 
-	// Iterate through schema attributes
-	for (let i = 0; i < relationalSchema.length; i++) {
-		if (
-			attributeOnlyLHS(relationalSchema[i], setOfFDs)
-		) // If it only appears on the LHS
-		{
-			// Then add to the base list of candidate keys
-			base.push(relationalSchema[i]);
-		} else if (!attributeOnlyRHS(relationalSchema[i], setOfFDs)) {
-			possibleCandidates.push(relationalSchema[i]);
+	let subsetsWithoutFirst = getSubsets(rest);
+	let subsetsWithFirst = subsetsWithoutFirst.map((s) => [first, ...s]); // Iterates through the array and returns
+	// 'transformed' values
+	return [...subsetsWithoutFirst, ...subsetsWithFirst];
+};
+
+const includesCandidateKey = (candidateKeys, currentSubset) => {
+	// console.log("Candidate keys: ", candidateKeys);
+	// console.log("Subset: ", currentSubset);
+	for (let i = 0; i < candidateKeys.length; i++) {
+		// If any candidate key is included within the current subset, return true
+		if (candidateKeys[i].find((attr) => currentSubset.includes(attr))) {
+			console.log(
+				candidateKeys[i].find((attr) => currentSubset.includes(attr))
+					? true
+					: false,
+			);
+			return true;
 		}
 	}
+	return false;
+};
 
-	// Is the base alone already CK?
+const getCandidateKeys = (relationalSchema, setOfFDs) => {
+	// An attribute or set of attr. is a candidate key if it's clause = the relational schema
+	// An attr. will never be part of a candidate key if it never appears on the LHS
+	// An attr. will always be part of the candidate key if it only appears on the LHS
+	let base = [];
+	let possibleAdditions = [];
+
+	for (let i = 0; i < relationalSchema.length; i++) {
+		let appearsLHS = false;
+		let appearsRHS = false;
+		for (let j = 0; j < setOfFDs.length; j++) {
+			// Test for presence on the LHS
+			if (setOfFDs[j].lhs.includes(relationalSchema[i])) appearsLHS = true;
+			// Test for presence on the RHS
+			if (setOfFDs[j].rhs.includes(relationalSchema[i])) appearsRHS = true;
+		}
+		if (appearsLHS && !appearsRHS)
+			// Must be part of the base
+			base.push(relationalSchema[i]);
+		else if (appearsLHS && appearsRHS)
+			possibleAdditions.push(relationalSchema[i]);
+		// If it only appears on RHS, do nothing
+	}
+
 	if (haveSameElements(calculateClosure(base, setOfFDs), relationalSchema))
 		return base;
 
+	possibleAdditions = getSubsets(possibleAdditions).filter(
+		(s) => s.length != 0,
+	);
+
+	// console.log(base);
+	// console.log(possibleAdditions);
+	// console.log(possibleAdditions.length);
+
 	let candidateKeys = [];
-	let subsets = getSubsets(possibleCandidates);
+
+	// Test all combinations between the base key and the available subsets;
+	// If any meet the condition of 'haveSameElements(calculateClosure(base), relationalSchema)'
+	// Add to the array 'candidateKeys'
+	// Whenever a subset is added, any other subsets that include it cannot be candidate keys
+
+	for (let j = 0; j < possibleAdditions.length; j++) {
+		let newCombo = [...base];
+		newCombo.push(...possibleAdditions[j]);
+		if (
+			haveSameElements(
+				calculateClosure(newCombo, setOfFDs),
+				relationalSchema,
+			) &&
+			!includesCandidateKey(candidateKeys, possibleAdditions[j])
+		) {
+			candidateKeys.push(newCombo);
+		}
+	}
+
+	return candidateKeys;
 };
 
 setOfFDs = splitRHS(setOfFDs);
@@ -280,5 +341,16 @@ const minimalCover = (setOfFDs) => {
 	return setOfFDs;
 };
 
-console.log(minimalCover(setOfFDs));
-console.log(minimalCover(setOfFDs4));
+// console.log(minimalCover(setOfFDs));
+// console.log(minimalCover(setOfFDs4));
+
+let schema = ["A", "B", "C", "D", "E"];
+
+let setOfFDs5 = [
+	{ lhs: ["A", "B"], rhs: ["C"] },
+	{ lhs: ["C"], rhs: ["D"] },
+	{ lhs: ["D"], rhs: ["E"] },
+	{ lhs: ["B", "E"], rhs: ["A"] },
+];
+
+// console.log(getCandidateKeys(schema, setOfFDs5));
