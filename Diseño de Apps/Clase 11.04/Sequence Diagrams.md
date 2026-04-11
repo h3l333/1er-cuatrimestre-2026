@@ -1,0 +1,1 @@
+Recuerdo el concepto de self- una instancia de una clase debe inicializarse con un "self"

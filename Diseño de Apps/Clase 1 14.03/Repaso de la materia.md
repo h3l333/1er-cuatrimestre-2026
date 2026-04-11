@@ -9,3 +9,5 @@
 - Email profesor: flarosa@unimoron.edu.ar (hay que mandarle emails con el link a una página hecha con WordPress, con el código de la materia)
 - Repasamos CU ([[Qué es un modelo de CU]]) ([[Qué es un CU y que no es un CU]])
 - [[Bibliografía]]
+- Creo que podemos usar PlantUML en el parcial si es que llevamos máquina propia
+- En un mismo diagrama de secuencia no se pueden meter varios alternativos. Despues busco bien que hacer
