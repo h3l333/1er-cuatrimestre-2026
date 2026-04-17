@@ -70,8 +70,8 @@ const splitRHS = (setOfFDs) => {
 				let j = 0;
 				j < currentDependency.rhs.length;
 				j++ // Iterate through the attributes on the rhs
-				// of the dependency and push each new resulting dependency
-			) {
+			) // of the dependency and push each new resulting dependency
+			{
 				let newDependency = {
 					lhs: [...currentDependency.lhs],
 					rhs: [currentDependency.rhs[j]],
@@ -90,8 +90,8 @@ const haveSameElements = (arr1, arr2) => {
 		let i = 0;
 		i < arr2.length;
 		i++ // Iterate through arr2's elements
-	) // Does arr1 include all the elements in arr2?
-	{
+		// Does arr1 include all the elements in arr2?
+	) {
 		match = match && arr1.includes(arr2[i]);
 	}
 
@@ -354,3 +354,13 @@ let setOfFDs5 = [
 ];
 
 // console.log(getCandidateKeys(schema, setOfFDs5));
+
+export default {
+	minimalCover,
+	getCandidateKeys,
+	calculateClosure,
+	haveSameElements,
+	removeExtraneousAttributes,
+	noRedundantDependencies,
+	splitRHS,
+};
