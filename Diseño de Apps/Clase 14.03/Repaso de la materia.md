@@ -11,3 +11,8 @@
 - [[Bibliografía]]
 - Creo que podemos usar PlantUML en el parcial si es que llevamos máquina propia
 - En un mismo diagrama de secuencia no se pueden meter varios alternativos. Despues busco bien que hacer
+- UN CONTROLADOR POR DIAGRAMA DE CLASES. NO UNO PARA CADA CLASE
+- Recuerdo la clase "enumeration"
+- DE LA CLASE INTERFAZ AL ACTOR NO HAY MENSAJE. LA CLASE INTERFAZ ES "TONTA"
+- Faltan en el diagrama de clase las reglas de negocio
+- Link al drive: https://drive.google.com/drive/folders/10YH-twsnbfN-z3rinShvjR53hFsaP5h3
