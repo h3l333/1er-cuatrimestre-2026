@@ -83,14 +83,14 @@ module.exports = db;
 
 Pruebo insertar una palabra con ID:
 
-![alt text](screenshot1.png)
+![alt text](Images/screenshot1.png)
 
 Luego, insertar una entrada de diccionario:
 
-![alt text](screenshot2.png)
+![alt text](Images/screenshot2.png)
 
 Luego de realizar las inserciones, puedo consultar tanto el registro de la palabra como el registro de la entrada de diccionario:
 
-![alt text](screenshot3.png)
+![alt text](Images/screenshot3.png)
 
-![alt text](screenshot4.png)
+![alt text](Images/screenshot4.png)
