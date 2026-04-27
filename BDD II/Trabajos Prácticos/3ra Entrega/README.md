@@ -81,9 +81,15 @@ module.exports = db;
 
 - server.js: Transforma la aplicación en un servicio persistente que puede ser accedido a través de la aplicación.
 
+Pruebo insertar una palabra con ID:
+
 ![alt text](screenshot1.png)
 
+Luego, insertar una entrada de diccionario:
+
 ![alt text](screenshot2.png)
+
+Luego de realizar las inserciones, puedo consultar tanto el registro de la palabra como el registro de la entrada de diccionario:
 
 ![alt text](screenshot3.png)
 
