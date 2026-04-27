@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Registrar Empresa</title>
+		<style>
+			:root {
+				--primary: #2c3e50;
+				--accent: #3498db;
+				--bg: #f4f7f6;
+				--error: #e74c3c;
+				--success: #2ecc71;
+			}
+
+			body {
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+				background-color: var(--bg);
+				color: var(--primary);
+				display: flex;
+				justify-content: center;
+				padding: 20px;
+			}
+
+			.container {
+				background: white;
+				padding: 30px;
+				border-radius: 8px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				max-width: 600px;
+				width: 100%;
+			}
+
+			h2 {
+				border-bottom: 2px solid var(--accent);
+				padding-bottom: 10px;
+			}
+
+			.form-group {
+				margin-bottom: 15px;
+			}
+
+			label {
+				display: block;
+				margin-bottom: 5px;
+				font-weight: bold;
+			}
+
+			input,
+			select {
+				width: 100%;
+				padding: 10px;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				box-sizing: border-box;
+			}
+
+			.row {
+				display: flex;
+				gap: 10px;
+			}
+
+			.row div {
+				flex: 1;
+			}
+
+			.btn-submit {
+				background-color: var(--accent);
+				color: white;
+				border: none;
+				padding: 12px;
+				border-radius: 4px;
+				cursor: pointer;
+				width: 100%;
+				font-size: 16px;
+				margin-top: 20px;
+			}
+
+			.btn-submit:hover {
+				background-color: #2980b9;
+			}
+
+			.message {
+				margin-top: 15px;
+				padding: 10px;
+				border-radius: 4px;
+				display: none;
+			}
+
+			.error {
+				background-color: #fdecea;
+				color: var(--error);
+			}
+
+			.success {
+				background-color: #eafaf1;
+				color: var(--success);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h2>Registro de Empresa</h2>
+			<p>Ingrese los datos para registrar una nueva empresa.</p>
+
+			<form id="empresaForm">
+				<div class="form-group">
+					<label for="nombre">Nombre de la Empresa</label>
+					<input type="text" id="nombre" required />
+				</div>
+
+				<div class="form-group">
+					<label for="cuit">CUIT</label>
+					<input type="text" id="cuit" placeholder="XX-XXXXXXXX-X" required />
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label for="rubro">Rubro</label>
+						<input type="text" id="rubro" required />
+					</div>
+					<div class="form-group">
+						<label for="sector">Sector</label>
+						<select id="sector" required>
+							<option value="">-- Seleccione --</option>
+							<option>Privado</option>
+							<option>Público</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="ubicacion">Ubicación</label>
+					<input type="text" id="ubicacion" required />
+				</div>
+
+				<div
+					style="
+						background: #eef2f3;
+						padding: 10px;
+						border-radius: 4px;
+						margin-bottom: 15px;
+					"
+				>
+					<p style="margin: 0; font-size: 0.9em">
+						<strong>Validaciones:</strong> El sistema verificará que todos los
+						campos estén completos y que el CUIT no esté previamente registrado.
+					</p>
+				</div>
+
+				<button type="submit" class="btn-submit">Confirmar Registro</button>
+
+				<div id="mensaje" class="message"></div>
+			</form>
+		</div>
+
+		<script>
+			const form = document.getElementById("empresaForm");
+			const mensaje = document.getElementById("mensaje");
+
+			form.addEventListener("submit", function (e) {
+				e.preventDefault();
+
+				const nombre = document.getElementById("nombre").value.trim();
+				const cuit = document.getElementById("cuit").value.trim();
+				const rubro = document.getElementById("rubro").value.trim();
+				const sector = document.getElementById("sector").value;
+				const ubicacion = document.getElementById("ubicacion").value.trim();
+
+				mensaje.style.display = "none";
+				mensaje.className = "message";
+
+				// Validación campos obligatorios
+				if (!nombre || !cuit || !rubro || !sector || !ubicacion) {
+					mensaje.textContent =
+						"Error: Todos los campos obligatorios deben completarse.";
+					mensaje.classList.add("error");
+					mensaje.style.display = "block";
+					return;
+				}
+
+				// Simulación CUIT existente
+				const cuitExistente = "20-12345678-9";
+
+				if (cuit === cuitExistente) {
+					mensaje.textContent =
+						"Error: Ya existe una empresa registrada con ese CUIT.";
+					mensaje.classList.add("error");
+					mensaje.style.display = "block";
+					return;
+				}
+
+				// Confirmación simulada
+				const confirmar = confirm(
+					"¿Desea confirmar el registro de la empresa?",
+				);
+
+				if (!confirmar) return;
+
+				mensaje.textContent = "Empresa registrada correctamente.";
+				mensaje.classList.add("success");
+				mensaje.style.display = "block";
+
+				form.reset();
+			});
+		</script>
+	</body>
+</html>

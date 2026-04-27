@@ -69,9 +69,9 @@ const splitRHS = (setOfFDs) => {
 			for (
 				let j = 0;
 				j < currentDependency.rhs.length;
-				j++ // Iterate through the attributes on the rhs
-			) // of the dependency and push each new resulting dependency
-			{
+				j++ // Iterate through the attributes on the RHS
+				// of the dependency and push each new resulting dependency
+			) {
 				let newDependency = {
 					lhs: [...currentDependency.lhs],
 					rhs: [currentDependency.rhs[j]],
@@ -90,8 +90,8 @@ const haveSameElements = (arr1, arr2) => {
 		let i = 0;
 		i < arr2.length;
 		i++ // Iterate through arr2's elements
-		// Does arr1 include all the elements in arr2?
-	) {
+	) // Does arr1 include all the elements in arr2?
+	{
 		match = match && arr1.includes(arr2[i]);
 	}
 
@@ -104,7 +104,7 @@ const haveSameElements = (arr1, arr2) => {
 
 const calculateClosure = (attributes, setOfFDs) => {
 	// Receives an array of chars representing a set of attributes and an array of
-	// objects representing a set of FDs (assumes already 'split')
+	// objects representing a set of FDs (assumes that they have already been 'split')
 	let closure = [...attributes]; // Example: AB -> A, AB -> B
 	let change;
 	do {
@@ -118,7 +118,7 @@ const calculateClosure = (attributes, setOfFDs) => {
 			let currentDependency = setOfFDs[i];
 			if (
 				currentDependency.lhs.every((attr) => closure.includes(attr))
-			) // Check that the lhs of a dependency matches the passed attributes
+			) // Check that the LHS of a dependency matches the passed attributes
 			{
 				// Then add the RHS to the closure if not already in the closure
 				if (!closure.includes(setOfFDs[i].rhs[0])) {
@@ -139,7 +139,7 @@ const removeExtraneousAttributes = (setOfFDs) => {
 	// remove the attribute
 	// Analyse setOfFDs, not the array to be returned
 	for (let i = 0; i < setOfFDs.length; i++) {
-		// Iterate through attributes on the lhs, removing one by one
+		// Iterate through attributes on the LHS, removing one by one
 		let originalDep = dependenciesNoExtraneous.find(
 			(dep) =>
 				haveSameElements(dep.lhs, setOfFDs[i].lhs) &&
